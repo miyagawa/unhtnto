@@ -26,7 +26,7 @@ __END__
 @@ redirect
 <html>
   <head>
-  <meta http-equiv="refresh" content="0; url=<%= @uri %>">
+  <meta http-equiv="refresh" content="0; url=<%=h @uri %>">
   </head>
 </html>
 
