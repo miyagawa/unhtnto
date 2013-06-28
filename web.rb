@@ -21,7 +21,13 @@ def redirect_uri(code)
   uri = URI.parse "http://htn.to/#{code}"
   response = Net::HTTP.get_response(uri)
   if [301, 302].include?(response.code.to_i)
-    response['Location'].sub %r[^http://b\.hatena\.ne\.jp/entry/], 'http://'
+    location = response['Location']
+    base = "http://b\.hatena\.ne\.jp/entry/"
+    if location =~ %r[^#{base}s/]
+      location.sub %r[^#{base}s/], 'https://'
+    else
+      location.sub %r[^#{base}], 'http://'
+    end
   else
     nil
   end
