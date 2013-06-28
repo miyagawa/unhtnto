@@ -11,6 +11,12 @@ get '/:code' do
   end
 end
 
+helpers do
+  def h(text)
+    Rack::Utils.escape_html(text)
+  end
+end
+
 def redirect_uri(code)
   uri = URI.parse "http://htn.to/#{code}"
   response = Net::HTTP.get_response(uri)
